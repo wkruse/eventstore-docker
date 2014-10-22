@@ -20,4 +20,12 @@ The `EVENTSTORE_DB` and `EVENTSTORE_LOG` (set to `/data/db` and `/data/logs` res
 
 **PLEASE NOTE: User projections are enabled by default.**
 
-This image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker).
+### Inspect the image
+
+To look around in the image, run:
+
+```bash
+docker run --rm -t -i -p 2113:2113 -p 1113:1113 wkruse/eventstore /sbin/my_init -- bash
+```
+
+This image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker). `SSH` is disabled.
