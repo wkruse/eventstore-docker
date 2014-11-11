@@ -28,8 +28,8 @@ RUN curl http://download.geteventstore.com/binaries/EventStore-OSS-Linux-v$ES_VE
 # Add volumes
 RUN mkdir -p $EVENTSTORE_DB && mkdir -p $EVENTSTORE_LOG \
 		&& chown -R eventstore:eventstore $EVENTSTORE_DB $EVENTSTORE_LOG
-VOLUME /data/db
-VOLUME /data/logs
+VOLUME $EVENTSTORE_DB
+VOLUME $EVENTSTORE_LOG
 
 # Change working directory
 WORKDIR $ES_HOME
