@@ -10,22 +10,23 @@ The [Event Store](http://geteventstore.com/) is a database for supporting the co
 
 ### Start an Event Store
 
+Start an Event Store node with
+- binding to all network interfaces
+- http server configured to respond to all prefixes
+- user projections enabled
+
 ```bash
-docker run --name some-eventstore -d -p 2113:2113 -p 1113:1113 wkruse/eventstore
+docker run --name some-eventstore -d -p 2113:2113 -p 1113:1113 wkruse/eventstore --ext-ip=0.0.0.0 --http-prefixes="http://*:2113/" --run-projections=all
 ```
 
 This image includes `EXPOSE 2113 1113` (the `HTTP` and `TCP` ports), so standard container port mapping will make it available to the host. Go to `http://<docker-host-ip>:2113` for the web ui. 
 
 The `EVENTSTORE_DB` and `EVENTSTORE_LOG` (set to `/data/db` and `/data/logs` respectively) are exposed as volumes.
 
-**PLEASE NOTE: User projections are enabled by default.**
-
 ### Inspect the image
 
 To look around in the image, run:
 
 ```bash
-docker run --rm -t -i -p 2113:2113 -p 1113:1113 wkruse/eventstore /sbin/my_init -- bash
+docker run --rm --entrypoint="bash" -it -p 2113:2113 -p 1113:1113 wkruse/eventstore
 ```
-
-This image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker). `SSH` is disabled.
